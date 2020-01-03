@@ -24,3 +24,41 @@ Implementation of various popular Deep Learning models and architectures.
 |-------------|---------|------------|
 | Implemented |   [:white_check_mark:](lenet_pytorch.py)  |   :ballot_box_with_check: |
 
+## AlexNet
+
+**Paper**: [ImageNet Classification with Deep Convolutional Neural Networks] (https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) (2012)
+
+**AlexNet** competed in the ImageNet Large Scale Visual Recognition Challenge and achieved a top-5 error of 15.3%. This model has made the name of Deep Learning as well known as today. Also, there is a special layer called LocalResponseNorm(LRN). However, there are some experiments that proof that LRN does not contribute much. 
+
+**Architecture Summary**
+
+<div align="center">
+<img src="figures/alexnet.png" alt="" title="AlexNet">
+</div>
+
+<a href="https://blogs.technet.microsoft.com/machinelearning/2017/04/12/embarrassingly-parallel-image-classification-using-cognitive-toolkit-tensorflow-on-azure-hdinsight-spark/"><p style="text-align:center">Image source</p></a>
+
+
+Note: If you read the original paper, the figure above will be a bit different. Because the author use 2 GPUs for training and the figure illustrate distribution of each layter to those GPUs.
+
+
+|       Layer       |   Kernel Size  | Number of Filter | Stride | Padding | Activation Function |  Output Size  |
+|:-----------------:|:--------------:|:----------------:|:------:|:-------:|:-------------------:|:-------------:|
+|       Input       |  227 x 227 x 3 |                  |        |         |                     |               |
+|    Convolution    |     11 x 11    |        96        |    4   |    0    |         ReLU        |  55 x 55 x 96 |
+| LocalResponseNorm |        -       |         -        |    -   |    -    |          -          |  55 x 55 x 96 |
+|     MaxPooling    |     3 x 3      |         -        |    2   |    0    |          -          |  27 x 27 x 96 |
+|    Convolution    |      5 x 5     |        256       |    1   |    1    |         ReLU        | 27 x 27 x 256 |
+| LocalResponseNorm |        -       |         -        |    -   |    -    |          -          | 27 x 27 x 256 |
+|     MaxPooling    |     3 x 3      |         -        |    2   |    0    |          -          | 13 x 13 x 256 |
+|    Convolution    |      3 x 3     |        384       |    1   |    1    |         ReLU        | 13 x 13 x 384 |
+|    Convolution    |      3 x 3     |        384       |    1   |    1    |         ReLU        | 13 x 13 x 384 |
+|    Convolution    |      3 x 3     |        256       |    1   |    1    |         ReLU        | 13 x 13 x 256 |
+|     MaxPooling    |      3 x 3     |         -        |    2   |    0    |          -          |  6 x 6 x 256  |
+|  Fully Connected  |      4096      |         -        |    -   |    -    |         ReLU        |      4096     |
+|  Fully Connected  |      4096      |         -        |    -   |    -    |         ReLU        |      4096     |
+|  Fully Connected  | 1000 (classes) |         -        |    -   |    -    |       softmax       |      1000     |
+
+| Framework   | PyTorch | TensorFlow |
+|-------------|---------|------------|
+| Implemented |   [:white_check_mark:](lenet_pytorch.py)  |   :ballot_box_with_check: |
