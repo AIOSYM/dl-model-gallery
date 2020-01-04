@@ -22,14 +22,14 @@ class AlexNet(nn.Module):
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = self.lrn(x)
-        x = F.max_pool2d(x)
+        x = F.max_pool2d(x, 2)
         x = F.relu(self.conv2(x))
         x = self.lrn(x)
-        x = F.max_pool2d(x)
+        x = F.max_pool2d(x, 2)
         x = self.conv3(x)
         x = self.conv4(x)
         x = self.conv5
-        x = F.max_pool2d(x)
+        x = F.max_pool2d(x, 2)
         x = x.view(-1, self.num_flat_features(x)) #6x6x256
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
