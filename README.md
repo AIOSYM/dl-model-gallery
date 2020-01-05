@@ -61,7 +61,7 @@ Note: If you read the original paper, the figure above will be a bit different. 
 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
-| Implemented |   [:white_check_mark:](lenet_pytorch.py)  |   :ballot_box_with_check: |
+| Implemented |   [:white_check_mark:](alexnet_pytorch.py)  |   :ballot_box_with_check: |
 
 ## VGG-16
 
@@ -98,3 +98,6 @@ Note: If you read the original paper, the figure above will be a bit different. 
 | Fully Connected |      4096     |         -        |    -   |    -    |         ReLU        |       4096      |
 | Fully Connected |  2 (classes)  |         -        |    -   |    -    |       softmax       |        2        |
 
+| Framework   | PyTorch | TensorFlow |
+|-------------|---------|------------|
+| Implemented |   [:white_check_mark:](vgg_pytorch.py)  |   :ballot_box_with_check: |
