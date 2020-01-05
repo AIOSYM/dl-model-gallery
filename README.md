@@ -62,3 +62,39 @@ Note: If you read the original paper, the figure above will be a bit different. 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
 | Implemented |   [:white_check_mark:](lenet_pytorch.py)  |   :ballot_box_with_check: |
+
+## VGG-16
+
+**Paper**: [Very Deep Convolutional Networks for Large-Scale Image Recognition] (https://arxiv.org/pdf/1409.1556.pdf) (2014)
+
+**VGG-16** is a model proposed by the researchers at the University of Oxford. This model uses many convolution layers on top of each other to extract features. VGG-16 here derived from the fact that there are 13 convolution layers and 3 fully connected layers (13+3=16). You might also see VGG-19 as well. So refer to the paper for more detail of the architecture. 
+
+**Architecture Summary**
+
+![VGG Architecture](figures/vgg.png)
+
+|      Layer      |  Kernel Size  | Number of Filter | Stride | Padding | Activation Function |   Output Size   |
+|:---------------:|:-------------:|:----------------:|:------:|:-------:|:-------------------:|:---------------:|
+|      Input      | 224 x 224 x 3 |                  |        |         |                     |                 |
+|   Convolution   |     3 x 3     |        64        |    1   |    1    |         ReLU        |  224 x 224 x 64 |
+|   Convolution   |     3 x 3     |        64        |    1   |    1    |         ReLU        |  224 x 224 x 64 |
+|    MaxPooling   |     2 x 2     |         -        |    2   |    0    |          -          |  112 x 112 x 64 |
+|   Convolution   |     3 x 3     |        128       |    1   |    1    |         ReLU        | 112 x 112 x 128 |
+|   Convolution   |     3 x 3     |        128       |    1   |    1    |         ReLU        | 112 x 112 x 128 |
+|    MaxPooling   |     2 x 2     |         -        |    2   |    0    |          -          |  56 x 56 x 128  |
+|   Convolution   |     3 x 3     |        256       |    1   |    1    |         ReLU        |  56 x 56 x 256  |
+|   Convolution   |     3 x 3     |        256       |    1   |    1    |         ReLU        |  56 x 56 x 256  |
+|   Convolution   |     3 x 3     |        256       |    1   |    1    |         ReLU        |  56 x 56 x 256  |
+|    MaxPooling   |     2 x 2     |         -        |    2   |    0    |          -          |  28 x 28 x 256  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  28 x 28 x 512  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  28 x 28 x 512  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  28 x 28 x 512  |
+|    MaxPooling   |     2 x 2     |         -        |    2   |    0    |          -          |  14 x 14 x 512  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  14 x 14 x 512  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  14 x 14 x 512  |
+|   Convolution   |     3 x 3     |        512       |    1   |    1    |         ReLU        |  14 x 14 x 512  |
+|    MaxPooling   |     2 x 2     |         -        |    2   |    0    |          -          |   7 x 7 x 512   |
+| Fully Connected |      4096     |         -        |    -   |    -    |         ReLU        |       4096      |
+| Fully Connected |      4096     |         -        |    -   |    -    |         ReLU        |       4096      |
+| Fully Connected |  2 (classes)  |         -        |    -   |    -    |       softmax       |        2        |
+
