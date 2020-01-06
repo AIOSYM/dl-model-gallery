@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F 
 
+img_width, img_height = 32, 32
 input_channel = 3
-img_height, img_width = 32, 32
 num_classes = 10
 
 class LeNet(nn.Module):
