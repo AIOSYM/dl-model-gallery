@@ -57,7 +57,7 @@ Note: If you read the original paper, the figure above will be a bit different. 
 |     MaxPooling    |      3 x 3     |         -        |    2   |    0    |          -          |  6 x 6 x 256  |
 |  Fully Connected  |      4096      |         -        |    -   |    -    |         ReLU        |      4096     |
 |  Fully Connected  |      4096      |         -        |    -   |    -    |         ReLU        |      4096     |
-|  Fully Connected  | 1000 (classes) |         -        |    -   |    -    |       softmax       |      1000     |
+|  Fully Connected  | 2 (classes) |         -        |    -   |    -    |       softmax       |      2     |
 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
