@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F 
 
+img_width, img_height = 227, 227
 input_channel = 3
 num_classes = 2
 
