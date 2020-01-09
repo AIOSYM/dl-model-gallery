@@ -48,6 +48,58 @@ class GoogLeNetv1(nn.Module):
         
         self.inception3a = InceptionModule(192, 64, 96, 16, 32, 128, 32)
         self.inception3b = InceptionModule(256, 128, 128, 32, 64, 192, 96)
+        
+        self.inception4a = InceptionModule(480, 192, 96, 16, 64, 208, 48)
+        self.inception4b = InceptionModule(512, 160, 112, 24, 64, 224, 64)
+        self.inception4c = InceptionModule(512, 128, 128, 24, 64, 256, 64)
+        self.inception4d = InceptionModule(512, 112, 144, 32, 64, 288, 64)
+        self.inception4e = InceptionModule(528, 256, 160, 32, 128, 320, 128)
+        
+        self.inception5a = InceptionModule(832, 256, 160, 32, 128, 320, 128)
+        self.inception5b = InceptionModule(832, 384, 192, 48, 128, 384, 128)
+        
+        self.linear = nn.Linear(1024, num_classes)
+        
+        self.aux1_conv1 = nn.Conv2d(512, 128, kernel_size=1, padding=0, stride=1)
+        self.aux1_linear1 = nn.Linear(14*14*128, 1024)
+        self.aux1_linear2 = nn.Linear(1024, num_classes)
+        
+        self.aux2_conv1 = nn.Conv2d(528, 128, kernel_size=1, padding=0, stride=1)
+        self.aux2_linear1 = nn.Linear(14*14*128, 1024)
+        self.aux2_linear2 = nn.Linear(1024, num_classes)
+         
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, 3, padding=1, stride=2)
+        x = F.local_response_norm(x, size=1)
+        
+        x = F.relu(self.conv2_1(x))
+        x = F.relu(self.conv2_2(x))
+        x = F.local_response_norm(x, size=1)
+        x = F.max_pool2d(x, 3, padding=1, stride=2)
+        
+        x = self.inception3a(x)
+        x = self.inception3b(x)
+        x = F.max_pool2d(x, 3, padding=1, stride=2)
+        
+        x = self.inception4a(x)
+        
+        x_aux1 = F.avg_pool2d(x, 5, padding=2, stride=1)
+        x_aux1 = F.relu(self.aux1_conv1(x_aux1))
+        x_aux1 = x_aux1.view(-1, 14*14*128)
+        x_aux1 = F.relu(self.aux1_linear1(x_aux1))
+        x_aux1 = F.dropout(x_aux1, p=0.7)
+        x_aux1 = F.relu(self.aux1_linear2(x_aux1))
+        x_aux1 = F.softmax(x_aux1, dim=1)
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
 
         
