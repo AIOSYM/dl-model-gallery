@@ -89,10 +89,36 @@ class GoogLeNetv1(nn.Module):
         x_aux1 = x_aux1.view(-1, 14*14*128)
         x_aux1 = F.relu(self.aux1_linear1(x_aux1))
         x_aux1 = F.dropout(x_aux1, p=0.7)
-        x_aux1 = F.relu(self.aux1_linear2(x_aux1))
+        x_aux1 = self.aux1_linear2(x_aux1)
         x_aux1 = F.softmax(x_aux1, dim=1)
         
+        x = self.inception4b(x)
+        x = self.inception4c(x)
+        x = self.inception4d(x)
         
+        x_aux2 = F.avg_pool2d(x, 5, padding=2, stride=1)
+        x_aux2 = F.relu(self.aux2_conv1(x_aux2))
+        x_aux2 = x_aux2.view(-1, 14*14*28)
+        x_aux2 = F.relu(self.aux2_linear1(x_aux2))
+        x_aux2 = F.dropout(x, p=0.7)
+        x_aux2 = self.aux2_linear2(x_aux2)
+        x_aux2 = F.softmax(x_aux2, dim=1)
+        
+        x = self.inception4e(x)
+        x = F.max_pool2d(x, 3, padding=1, stride=2)
+        x = self.inception5a(x)
+        x = self.inception5b(x)
+        x = F.avg_pool2d(x, 7, padding=0, stride=1)
+        x = x.view(-1, 1024)
+        x = self.linear(x)
+        x = F.softmax(x, dim=1)  
+        
+        return x, x_aux1, x_aux2
+    
+if __name__ == '__main__':
+    net = GoogLeNetv1()
+    print("Implementation of {} in PyTorch".format(net.__class__.__name__))
+    print(net)      
         
         
         
