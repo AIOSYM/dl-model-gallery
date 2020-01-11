@@ -101,3 +101,22 @@ Note: If you read the original paper, the figure above will be a bit different. 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
 | Implemented |   [:white_check_mark:](vgg_pytorch.py)  |   :ballot_box_with_check: |
+
+
+## GoogLeNet
+
+**Paper**: [Going Deeper with Convolutions] (https://arxiv.org/abs/1409.4842) (2014)
+
+**GoogLeNet** is a 22 layers deep network and this name is honor to
+Yann LeCuns pioneering LeNet 5 network. It introduces a new module called **Inception**. 
+
+**Architecture Summary**
+
+![Inception Module](figures/inception.png)
+
+![](figures/googlenet.png)
+
+| Framework   | PyTorch | TensorFlow |
+|-------------|---------|------------|
+| Implemented |   [:white_check_mark:](vgg_pytorch.py)  |   :ballot_box_with_check: |
+
