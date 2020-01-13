@@ -116,7 +116,19 @@ Yann LeCuns pioneering LeNet 5 network. It introduces a new module called **Ince
 
 ![](figures/googlenet.png)
 
+|  Layer | Kernel Size/Stride/Padding | #Filter | #1x1 | #3x3 | #5x5 | pooling | #3x3(reduce) | #5x5(reduce) | output size |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  Input | 224 x 224 x 3 | - | - | - | - | - | - | - |  |
+|  Convolution | 7 x 7 / 2 / 0 | 64 | - | - | - | - | - | - | 112x112x64 |
+|  MaxPool | 3 x 3 / 2 | - | - | - | - | - | - | - | 56x56x64 |
+|  LocalResponseNorm | - | - | - | - | - | - | - | - | 56x56x64 |
+|  Convolution | 1 x 1 / 1 / 0 | 64 | - | - | - | - | - | - | 56x56x64 |
+|  Convolution | 3 x 3 / 1 / 1 | 192 | - | - | - | - | - | - | 56x56x192 |
+|  LocalResponseNorm | - | - | - | - | - | - | - | - | 56x56x192 |
+|  MaxPool | 3 x 3 / 2 | - | - | - | - | - | - | - | 28x28x192 |
+
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
 | Implemented |   [:white_check_mark:](vgg_pytorch.py)  |   :ballot_box_with_check: |
+
 
