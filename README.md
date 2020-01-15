@@ -116,25 +116,31 @@ Yann LeCuns pioneering LeNet 5 network. It introduces a new module called **Ince
 
 ![](figures/googlenet.png)
 
-|  Layer | Kernel Size/Stride/Padding | #Filter | For inception module |  |  |  |  |  | output size |
-| :---: | :---: | :---: | :---: | --- | --- | --- | --- | --- | :---: |
-|   |  |  | #1x1 | #3x3 | #5x5 | pooling | #3x3(reduce) | #5x5(reduce) |  |
-|  Input | 224 x 224 x 3 | - | - | - | - | - | - | - |  |
-|  Convolution | 7 x 7 / 2 / 0 | 64 | - | - | - | - | - | - | 112x112x64 |
-|  MaxPool | 3 x 3 / 2 | - | - | - | - | - | - | - | 56x56x64 |
-|  LocalResponseNorm | - | - | - | - | - | - | - | - | 56x56x64 |
-|  Convolution | 1 x 1 / 1 / 0 | 64 | - | - | - | - | - | - | 56x56x64 |
-|  Convolution | 3 x 3 / 1 / 1 | 192 | - | - | - | - | - | - | 56x56x192 |
-|  LocalResponseNorm | - | - | - | - | - | - | - | - | 56x56x192 |
-|  MaxPool | 3 x 3 / 2 | - | - | - | - | - | - | - | 28x28x192 |
-|  inception(3a) | - | - | 64 | 128 | 32 | 32 | 96 | 16 | 28x28x256 |
-|  inception(3b) | - | - | 128 | 192 | 96 | 64 | 128 | 32 | 28x28x480 |
-|  MaxPool | 3 x 3 / 2 | - | - | - | - | - | - | - | 14x14x480 |
-|  inception(4a) | - | - | 192 | 208 | 48 | 64 | 96 | 16 | 14x14x512 |
-|  inception(4b) | - | - | 160 | 224 | 64 | 64 | 112 | 24 | 14x14x512 |
-|  inception(4c) | - | - | 128 | 256 | 64 | 64 | 128 | 24 | 14x14x512 |
-|  inception(4d) | - | - | 112 | 288 | 64 | 64 | 144 | 32 | 14x14x528 |
-|  inception(4e) | - | - | 256 | 320 | 128 | 128 | 160 | 32 | 14x14x832 |
+|  Layer | Kernel Size/Stride/Padding | #Filter | For inception module |  |  |  |  |  | Activation Function | output size |
+| :---: | :---: | :---: | :---: | --- | --- | --- | --- | --- | :---: | :---: |
+|   |  |  | #1x1 | #3x3 | #5x5 | pooling | #3x3(reduce) | #5x5(reduce) |  |  |
+|  Input | 224x224x3 |  |  |  |  |  |  |  |  |  |
+|  Convolution | 7x7 / 2 / 0 | 64 | - | - | - | - | - | - | ReLU | 112x112x64 |
+|  MaxPool | 3x3 / 2 | - | - | - | - | - | - | - | - | 56x56x64 |
+|  LocalResponseNorm | - | - | - | - | - | - | - | - | - | 56x56x64 |
+|  Convolution | 1x1 / 1 / 0 | 64 | - | - | - | - | - | - | ReLU | 56x56x64 |
+|  Convolution | 3x3 / 1 / 1 | 192 | - | - | - | - | - | - | ReLU | 56x56x192 |
+|  LocalResponseNorm | - | - | - | - | - | - | - | - | - | 56x56x192 |
+|  MaxPool | 3x3 / 2 | - | - | - | - | - | - | - | - | 28x28x192 |
+|  Inception(3a) | - | - | 64 | 128 | 32 | 32 | 96 | 16 | - | 28x28x256 |
+|  Inception(3b) | - | - | 128 | 192 | 96 | 64 | 128 | 32 | - | 28x28x480 |
+|  MaxPool | 3x3 / 2 | - | - | - | - | - | - | - | - | 14x14x480 |
+|  Inception(4a) | - | - | 192 | 208 | 48 | 64 | 96 | 16 | - | 14x14x512 |
+|  Inception(4b) | - | - | 160 | 224 | 64 | 64 | 112 | 24 | - | 14x14x512 |
+|  Inception(4c) | - | - | 128 | 256 | 64 | 64 | 128 | 24 | - | 14x14x512 |
+|  Inception(4d) | - | - | 112 | 288 | 64 | 64 | 144 | 32 | - | 14x14x528 |
+|  Inception(4e) | - | - | 256 | 320 | 128 | 128 | 160 | 32 | - | 14x14x832 |
+|  MaxPool | 3x3 / 2 | - | - | - | - | - | - | - | - | 7x7x832 |
+|  Inception(5a) | - | - | - | - | - | - | - | - | - | 7x7x832 |
+|  Inception(5b) | - | - | - | - | - | - | - | - | - | 7x7x1024 |
+|  AvgPool | 7x7 / 1 | - | - | - | - | - | - | - | - | 1x1x1024 |
+|  Dropout (40%) | - | - | - | - | - | - | - | - | - | 1x1x1024 |
+|  Fully Connected | 2 (classes) | - | - | - | - | - | - | - | softmax | 1x1x2 |
 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
