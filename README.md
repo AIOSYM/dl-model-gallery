@@ -144,6 +144,6 @@ Yann LeCuns pioneering LeNet 5 network. It introduces a new module called **Ince
 
 | Framework   | PyTorch | TensorFlow |
 |-------------|---------|------------|
-| Implemented |   [:white_check_mark:](vgg_pytorch.py)  |   :ballot_box_with_check: |
+| Implemented |   [:white_check_mark:](googlenetv1_pytorch.py)  |   :ballot_box_with_check: |
 
 
